@@ -5,7 +5,7 @@ from io import BytesIO
 import numpy as np
 
 # Set the style for all plots - using a built-in style
-plt.style.use('fivethirtyeight')  # Alternative styles: 'bmh', 'ggplot', 'classic'
+plt.style.use('fivethirtyeight')  
 
 def configure_plot_style(fig, ax):
     """Configure common plot styling elements"""
@@ -15,8 +15,6 @@ def configure_plot_style(fig, ax):
     fig.patch.set_facecolor('white')
     ax.set_facecolor('white')
 
-# Display available styles (optional)
-st.sidebar.write("Available Matplotlib Styles:", plt.style.available)
 
 st.title("Interactive Dataset Plotting Tool")
 
@@ -52,11 +50,10 @@ if uploaded_file:
                 if plot_type == "Line Plot":
                     ax.plot(df[x_column], df[y_column], marker='o', linewidth=2, 
                            color=plt.cm.get_cmap(color_scheme)(0.6))
-                else:  # Bar Plot
-                    bars = ax.bar(df[x_column], df[y_column])
-                    for i, bar in enumerate(bars):
-                        bar.set_color(plt.cm.get_cmap(color_scheme)(i/len(bars)))
-                
+                else:  
+                    ax.bar(df[x_column], df[y_column], color=plt.cm.get_cmap(color_scheme)(0.6))
+                    
+                    
                 ax.set_title(f"{plot_type} of {y_column} vs {x_column}", pad=20, fontsize=14)
                 ax.set_xlabel(x_column, fontsize=12)
                 ax.set_ylabel(y_column, fontsize=12)
